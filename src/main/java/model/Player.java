@@ -1,12 +1,17 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,6 +33,14 @@ public class Player {
 	
 	@Column (name="date_naissance")
 	private LocalDate dateNaissance;
+	
+	@ManyToMany(cascade = { CascadeType.ALL })
+	    @JoinTable(
+	        name = "joueur_partie", 
+	        joinColumns = { @JoinColumn(name = "id_joueur") }, 
+	        inverseJoinColumns = { @JoinColumn(name = "id_partie") }
+	    )
+	private Set<Partie> parties;
 	
 	
 	public Player() {
@@ -67,12 +80,20 @@ public class Player {
 		this.dateNaissance = dateNaissance;
 	}
 
+	public Set<Partie> getParties() {
+		return parties;
+	}
+
+
+	public void setParties(Set<Partie> parties) {
+		this.parties = parties;
+	}
+
 
 	@Override
 	public String toString() {
 		return "Player [id=" + id + ", name=" + name + ", mail=" + mail + ", pseudo=" + pseudo + ", dateNaissance="
-				+ dateNaissance + "]";
+				+ dateNaissance + ", parties=" + parties + "]";
 	}
-
 	
 }
