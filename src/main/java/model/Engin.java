@@ -25,8 +25,8 @@ public class Engin {
 	private Integer vitesse_max;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "personnage_id")
-	private Personnage personnage;
+    @JoinColumn(name = "avatar_id")
+	private Avatar avatar;
 
 	public Engin() {
 	}
@@ -55,18 +55,18 @@ public class Engin {
 		this.vitesse_max = vitesse_max;
 	}
 
-	public Personnage getPersonnage() {
-		return personnage;
+	public Avatar getAvatar() {
+		return avatar;
 	}
 
-	public void setPersonnage(Personnage personnage) {
-		this.personnage = personnage;
+	public void setPersonnage(Avatar avatar) {
+		this.avatar = avatar;
 	}
 
 	@Override
 	public String toString() {
-		return "Engin [id=" + id + ", couleur=" + couleur + ", vitesse_max=" + vitesse_max + ", personnage="
-				+ personnage + "]";
+		return "Engin [id=" + id + ", couleur=" + couleur + ", vitesse_max=" + vitesse_max + ", avatar="
+				+ avatar + "]";
 	}
 			
 }

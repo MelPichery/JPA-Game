@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="personnage")
-public class Personnage {
+@Table(name="avatar")
+public class Avatar {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -21,7 +21,7 @@ public class Personnage {
 	@Column(name="puissance", nullable = false)
 	private Integer puissance;
 
-	public Personnage() {
+	public Avatar() {
 	}
 
 	public Integer getId() {
@@ -50,7 +50,7 @@ public class Personnage {
 
 	@Override
 	public String toString() {
-		return "Personnage [id=" + id + ", nom=" + nom + ", puissance=" + puissance + "]";
+		return "Avatar [id=" + id + ", nom=" + nom + ", puissance=" + puissance + "]";
 	}
 	
 		

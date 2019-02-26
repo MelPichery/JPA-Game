@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -41,6 +42,9 @@ public class Player {
 	        inverseJoinColumns = { @JoinColumn(name = "id_partie") }
 	    )
 	private Set<Partie> parties;
+	
+	@OneToOne
+	private Avatar avatar;
 	
 	
 	public Player() {
@@ -89,11 +93,22 @@ public class Player {
 		this.parties = parties;
 	}
 
+	
+	public Avatar getAvatar() {
+		return avatar;
+	}
+
+
+	public void setAvatar(Avatar avatar) {
+		this.avatar = avatar;
+	}
+
 
 	@Override
 	public String toString() {
 		return "Player [id=" + id + ", name=" + name + ", mail=" + mail + ", pseudo=" + pseudo + ", dateNaissance="
-				+ dateNaissance + ", parties=" + parties + "]";
+				+ dateNaissance + ", parties=" + parties + ", avatar=" + avatar + "]";
 	}
+
 	
 }

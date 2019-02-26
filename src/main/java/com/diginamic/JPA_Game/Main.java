@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
 import database.DatabaseHandle;
 import model.Engin;
 import model.Partie;
-import model.Personnage;
+import model.Avatar;
 import model.Player;
 
 public class Main {
@@ -73,14 +73,20 @@ public class Main {
 		 //System.out.println(p1.toString());
 		 
 		 //create personnage1
-		 Personnage perso1 = new Personnage();
+		 Avatar perso1 = new Avatar();
 		 perso1.setNom("perso1");
 		 perso1.setPuissance(333);
 		 
+		 //add avatar to player1
+		 p1.setAvatar(perso1);
+		 
 		 //create personnage2	
-		 Personnage perso2 = new Personnage();
+		 Avatar perso2 = new Avatar();
 		 perso2.setNom("perso2");
 		 perso2.setPuissance(666);
+		 
+		//add avatar to player2
+		 p2.setAvatar(perso2);
 		 
 		 //create partie1
 		Partie pp1 = new Partie();
@@ -88,7 +94,7 @@ public class Main {
 		pp1.setNiveau(3);
 		pp1.setDate(LocalDate.now());
 		pp1.setScore(200);
-		pp1.setPersonnage(perso1);
+
 		
 		//create set for adding partie1 to player1
 		Set<Partie> parties1 = new HashSet<Partie>();
@@ -101,11 +107,12 @@ public class Main {
 		pp2.setNiveau(1);
 		pp2.setDate(LocalDate.now());
 		pp2.setScore(22);
-		pp2.setPersonnage(perso2);
+		
 		
 		//create set for adding partie2 to player2
 		Set<Partie> parties2 = new HashSet<Partie>();
 		parties2.add(pp2);
+		parties2.add(pp1);
 		p2.setParties(parties2);
 		
 		//create engin1

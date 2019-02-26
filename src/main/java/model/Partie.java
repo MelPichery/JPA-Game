@@ -6,13 +6,10 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -33,9 +30,6 @@ public class Partie {
 	@Column (name="date")
 	private LocalDate date;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "personnage_id")
-	private Personnage personnage;
 	
 	@ManyToMany(mappedBy = "parties")
 	private Set<Player> players = new HashSet<Player>();
@@ -74,17 +68,6 @@ public class Partie {
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
-
-	
-	
-	public Personnage getPersonnage() {
-		return personnage;
-	}
-
-	public void setPersonnage(Personnage personnage) {
-		this.personnage = personnage;
-	}
-	
 	
 	public Set<Player> getPlayers() {
 		return players;
@@ -96,8 +79,7 @@ public class Partie {
 
 	@Override
 	public String toString() {
-		return "Partie [id=" + id + ", niveau=" + niveau + ", score=" + score + ", date=" + date + ", personnage="
-				+ personnage + "]";
+		return "Partie [id=" + id + ", niveau=" + niveau + ", score=" + score + ", date=" + date + "]";
 	}
 	
 }
