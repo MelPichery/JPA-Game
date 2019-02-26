@@ -1,18 +1,22 @@
 package model;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+
 
 @Entity
-@Table(name="engin")
-public class Engin {
+@Inheritance(strategy=InheritanceType.JOINED) 
+public abstract class Engin {
+
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,13 +26,15 @@ public class Engin {
 	private String couleur;
 	
 	@Column(name="vitesse_max",nullable = false)
-	private Integer vitesse_max;
+	private Integer vitesseMax;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "avatar_id")
 	private Avatar avatar;
-
+	
+	
 	public Engin() {
+		super();
 	}
 
 	public Integer getId() {
@@ -47,25 +53,27 @@ public class Engin {
 		this.couleur = couleur;
 	}
 
-	public Integer getVitesse_max() {
-		return vitesse_max;
+	public Integer getVitesseMax() {
+		return vitesseMax;
 	}
 
-	public void setVitesse_max(Integer vitesse_max) {
-		this.vitesse_max = vitesse_max;
+	public void setVitesseMax(Integer vitesse_max) {
+		this.vitesseMax = vitesse_max;
 	}
 
 	public Avatar getAvatar() {
 		return avatar;
 	}
 
-	public void setPersonnage(Avatar avatar) {
+	public void setAvatar(Avatar avatar) {
 		this.avatar = avatar;
 	}
 
+		
+
 	@Override
 	public String toString() {
-		return "Engin [id=" + id + ", couleur=" + couleur + ", vitesse_max=" + vitesse_max + ", avatar="
+		return "Engin [id=" + id + ", couleur=" + couleur + ", vitesse_max=" + vitesseMax + ", avatar="
 				+ avatar + "]";
 	}
 			

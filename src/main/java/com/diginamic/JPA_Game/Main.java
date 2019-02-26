@@ -6,11 +6,16 @@ import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+
+
 import database.DatabaseHandle;
 import model.Engin;
 import model.Partie;
+import model.Aeronef;
 import model.Avatar;
+import model.Bolide;
 import model.Player;
 
 public class Main {
@@ -116,30 +121,54 @@ public class Main {
 		p2.setParties(parties2);
 		
 		//create engin1
-		Engin e1 = new Engin();
-		e1.setCouleur("noir");
-		e1.setVitesse_max(3000);
-		e1.setPersonnage(perso1);
+		Aeronef a = new Aeronef();
+		a.setCouleur("noir");
+		a.setVitesseMax(3000);
+		a.setType("chouette");
+		a.setAutonomieKm(99);
+		a.setAvatar(perso1);
 		
 		//create engin2
-		Engin e2 = new Engin();
-		e2.setCouleur("vert");
-		e2.setVitesse_max(50);
-		e2.setPersonnage(perso2);
+		Bolide b = new Bolide();
+		b.setCouleur("vert");
+		b.setVitesseMax(50);
+		b.setNb_roues(3);
+		b.setAutonomieHeure(2);
+		b.setAvatar(perso2);
 		
 		//persist objects in db
 		em.persist(p1);
 		em.persist(p2);
 		em.persist(perso1);
 		em.persist(perso2);
-		em.persist(e1);
-		em.persist(e2);
+		em.persist(a);
+		em.persist(b);
 		em.persist(pp1);
 		em.persist(pp2);
 		
 		//print players
 		TypedQuery<Player> pq = em.createQuery("FROM Player", Player.class);
 		System.out.println(pq.getResultList());
+		
+		//find John Doe
+		TypedQuery<Player> query = em.createQuery("SELECT p FROM Player p WHERE name = :name", Player.class);
+		query.setParameter("name", "John DOE");
+		System.out.println(query.getResultList());
+		
+		//sort by pseudo
+		Query query1 = em.createQuery("SELECT p.pseudo FROM Player p ORDER BY p.pseudo");
+		System.out.println(query1.getResultList());
+		
+		//players names which play today
+		Query query2 = em.createQuery("SELECT DISTINCT pl.name FROM Partie pa, Player pl WHERE pa.date = :date");
+		query2.setParameter("date", LocalDate.now());
+		System.out.println(query2.getResultList());
+		
+		TypedQuery<String> query3 = em.createQuery("SELECT DISTINCT pl.name FROM Player pl JOIN pl.parties pa JOIN pa.players WHERE pa.date = :date",String.class);
+		query3.setParameter("date", LocalDate.now());
+		System.out.println(query3.getResultList());
+		
+		//for a player, print engin, score and niveau
 		
 		//add 1 to niveau
 		TypedQuery<Partie> q = em.createQuery("FROM Partie", Partie.class);
