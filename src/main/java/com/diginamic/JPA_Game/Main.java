@@ -179,6 +179,29 @@ public class Main {
 			System.out.println("Nom joueur : "+objects[0]+"    Niveau : " + objects[1]+"    Score : "+objects[2]+"      nom avatar : "+objects[3]+"      Partie N° : "+objects[4]+"       Couleur Engin : "+objects[5] );
 		}
 		
+		//update engin : bolide to aeronef
+		Aeronef a2 = new Aeronef();
+		a2.setCouleur("noir");
+		a2.setVitesseMax(3000);
+		a2.setType("chouette");
+		a2.setAutonomieKm(99);
+		a2.setAvatar(perso2);
+		
+		Query query5 = em.createQuery("UPDATE Engin e SET e.couleur=:couleur, e.vitesseMax=:vitessemax WHERE e.id = :id ");
+		query5.setParameter("couleur", a2.getCouleur());
+		query5.setParameter("vitessemax", a2.getVitesseMax());
+		query5.setParameter("id", b.getId());
+		query5.executeUpdate();
+		
+		Query query6 = em.createQuery("SELECT DISTINCT pl.name, pa.niveau,pa.score, a.nom, pa.id, e.couleur FROM Player pl JOIN pl.parties pa JOIN pa.players JOIN pl.avatar a, Engin e WHERE e.avatar = a.id AND pl.id = :id AND pa.date=:date");
+		query6.setParameter("id", 2);
+		query6.setParameter("date", LocalDate.now());
+		List<Object[]> tests1 = query6.getResultList();
+		
+		for (Object[] objects : tests1) {
+			System.out.println("Nom joueur : "+objects[0]+"    Niveau : " + objects[1]+"    Score : "+objects[2]+"      nom avatar : "+objects[3]+"      Partie N° : "+objects[4]+"       Couleur Engin : "+objects[5] );
+		}
+		
 		//add 1 to niveau
 		TypedQuery<Partie> q = em.createQuery("FROM Partie", Partie.class);
 
