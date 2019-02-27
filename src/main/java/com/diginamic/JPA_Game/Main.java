@@ -1,7 +1,9 @@
 package com.diginamic.JPA_Game;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -110,7 +112,7 @@ public class Main {
 		Partie pp2 = new Partie();
 
 		pp2.setNiveau(1);
-		pp2.setDate(LocalDate.now());
+		pp2.setDate(LocalDate.of(2019, 02, 26));
 		pp2.setScore(22);
 		
 		
@@ -169,6 +171,13 @@ public class Main {
 		System.out.println(query3.getResultList());
 		
 		//for a player, print engin, score and niveau
+		Query query4 = em.createQuery("SELECT DISTINCT pl.name, pa.niveau,pa.score, a.nom, pa.id, e.couleur FROM Player pl JOIN pl.parties pa JOIN pa.players JOIN pl.avatar a, Engin e WHERE e.avatar = a.id AND pl.id = :id AND pa.date=:date");
+		query4.setParameter("id", 2);
+		query4.setParameter("date", LocalDate.now());
+		List<Object[]> tests = query4.getResultList();
+		for (Object[] objects : tests) {
+			System.out.println("Nom joueur : "+objects[0]+"    Niveau : " + objects[1]+"    Score : "+objects[2]+"      nom avatar : "+objects[3]+"      Partie N° : "+objects[4]+"       Couleur Engin : "+objects[5] );
+		}
 		
 		//add 1 to niveau
 		TypedQuery<Partie> q = em.createQuery("FROM Partie", Partie.class);
