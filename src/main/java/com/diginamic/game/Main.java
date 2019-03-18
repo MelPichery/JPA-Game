@@ -1,4 +1,4 @@
-package com.diginamic.JPA_Game;
+package com.diginamic.game;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

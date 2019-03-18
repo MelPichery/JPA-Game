@@ -1,4 +1,4 @@
-package com.diginamic.JPA_Game;
+package com.diginamic.game;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
