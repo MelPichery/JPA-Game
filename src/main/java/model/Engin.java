@@ -57,8 +57,8 @@ public abstract class Engin {
 		return vitesseMax;
 	}
 
-	public void setVitesseMax(Integer vitesse_max) {
-		this.vitesseMax = vitesse_max;
+	public void setVitesseMax(Integer vitesseMax) {
+		this.vitesseMax = vitesseMax;
 	}
 
 	public Avatar getAvatar() {
