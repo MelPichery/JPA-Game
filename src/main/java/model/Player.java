@@ -47,9 +47,6 @@ public class Player {
 	private Avatar avatar;
 	
 	
-	public Player() {
-	}
-	
 	
 	public Integer getId() {
 		return id;

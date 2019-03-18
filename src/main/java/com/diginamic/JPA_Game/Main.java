@@ -11,6 +11,8 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import database.DatabaseHandle;
 import model.Engin;
@@ -23,6 +25,9 @@ import model.Player;
 public class Main {
 
 	public static void main(String[] args) {
+		
+		 final Logger logger = LoggerFactory.getLogger(Main.class);
+
 
 		EntityManager em = DatabaseHandle.getEntityManagerFactory();
 
@@ -150,25 +155,25 @@ public class Main {
 		
 		//print players
 		TypedQuery<Player> pq = em.createQuery("FROM Player", Player.class);
-		System.out.println(pq.getResultList());
+		logger.info("Requête player: {}",pq.getResultList());
 		
 		//find John Doe
 		TypedQuery<Player> query = em.createQuery("SELECT p FROM Player p WHERE name = :name", Player.class);
 		query.setParameter("name", "John DOE");
-		System.out.println(query.getResultList());
+		logger.info("Requête player: {}",query.getResultList());
 		
 		//sort by pseudo
 		Query query1 = em.createQuery("SELECT p.pseudo FROM Player p ORDER BY p.pseudo");
-		System.out.println(query1.getResultList());
+		logger.info("Requête player: {}",query1.getResultList());
 		
 		//players names which play today
 		Query query2 = em.createQuery("SELECT DISTINCT pl.name FROM Partie pa, Player pl WHERE pa.date = :date");
 		query2.setParameter("date", LocalDate.now());
-		System.out.println(query2.getResultList());
+		logger.info("Requête player et partie: {}",query2.getResultList());
 		
 		TypedQuery<String> query3 = em.createQuery("SELECT DISTINCT pl.name FROM Player pl JOIN pl.parties pa JOIN pa.players WHERE pa.date = :date",String.class);
 		query3.setParameter("date", LocalDate.now());
-		System.out.println(query3.getResultList());
+		logger.info("Requête player: {}",query3.getResultList());
 		
 		//for a player, print engin, score and niveau
 		Query query4 = em.createQuery("SELECT DISTINCT pl.name, pa.niveau,pa.score, a.nom, pa.id, e.couleur FROM Player pl JOIN pl.parties pa JOIN pa.players JOIN pl.avatar a, Engin e WHERE e.avatar = a.id AND pl.id = :id AND pa.date=:date");
@@ -199,7 +204,7 @@ public class Main {
 		List<Object[]> tests1 = query6.getResultList();
 		
 		for (Object[] objects : tests1) {
-			System.out.println("Nom joueur : "+objects[0]+"    Niveau : " + objects[1]+"    Score : "+objects[2]+"      nom avatar : "+objects[3]+"      Partie N° : "+objects[4]+"       Couleur Engin : "+objects[5] );
+			logger.info("Nom joueur : "+objects[0]+"    Niveau : " + objects[1]+"    Score : "+objects[2]+"      nom avatar : "+objects[3]+"      Partie N° : "+objects[4]+"       Couleur Engin : "+objects[5] );
 		}
 		
 		//add 1 to niveau
@@ -212,7 +217,7 @@ public class Main {
 
 			}
 
-			System.out.println(q.getResultList());
+			logger.info("Requête player: {}",q.getResultList());
 			
 			transaction.commit();
 			

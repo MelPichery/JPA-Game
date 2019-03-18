@@ -21,9 +21,7 @@ public class Avatar {
 	@Column(name="puissance", nullable = false)
 	private Integer puissance;
 
-	public Avatar() {
-	}
-
+	
 	public Integer getId() {
 		return id;
 	}

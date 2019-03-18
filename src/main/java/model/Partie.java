@@ -34,9 +34,7 @@ public class Partie {
 	@ManyToMany(mappedBy = "parties")
 	private Set<Player> players = new HashSet<Player>();
 	
-	public Partie() {
-	}
-
+	
 	public Integer getId() {
 		return id;
 	}

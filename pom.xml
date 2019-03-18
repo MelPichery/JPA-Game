@@ -49,6 +49,12 @@
 			<version>6.0.4</version>
 		</dependency>
 
+		<dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.26</version>
+        </dependency>
+
 		<!-- Obligatory for all java version -->
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
