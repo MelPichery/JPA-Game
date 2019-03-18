@@ -9,6 +9,10 @@ public class DatabaseHandle {
 	// Create an EntityManagerFactory when you start the application.
 	private static EntityManager entityManager;
 	
+	private DatabaseHandle() {
+		
+	}
+	
 	public static synchronized EntityManager getEntityManagerFactory()
 	{
 		if (entityManager == null || ! entityManager.isOpen())
