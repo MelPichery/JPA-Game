@@ -181,7 +181,7 @@ public class Main {
 		query4.setParameter("date", LocalDate.now());
 		List<Object[]> tests = query4.getResultList();
 		for (Object[] objects : tests) {
-			System.out.println("Nom joueur : "+objects[0]+"    Niveau : " + objects[1]+"    Score : "+objects[2]+"      nom avatar : "+objects[3]+"      Partie N° : "+objects[4]+"       Couleur Engin : "+objects[5] );
+			logger.info("Nom joueur : {0}     Niveau : {1}     Score : {2}       nom avatar : {3}       Partie N° : {4}        Couleur Engin : {5}",objects[0],objects[1],objects[2],objects[3],objects[4],objects[5] );
 		}
 		
 		//update engin : bolide to aeronef
