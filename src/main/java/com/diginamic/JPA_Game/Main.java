@@ -37,22 +37,22 @@ public class Main {
 		transaction.begin();
 
 		// the record is read and the object is now managed by Hibernate in memory
-		// Player p = em.find(Player.class, 1);
-		// System.out.println(p.getName());
+		/* Player p = em.find(Player.class, 1);
+		 System.out.println(p.getName());
 
-		// TypedQuery<Player> query = em.createQuery("FROM Player",Player.class);
-		// System.out.println("Nombre de joueurs : " + query.getResultList().size());
-		// System.out.println(query.getResultList());
+		 TypedQuery<Player> query = em.createQuery("FROM Player",Player.class);
+		 System.out.println("Nombre de joueurs : " + query.getResultList().size());
+		 System.out.println(query.getResultList());*/
 
 		// the persistent object is modified
-		// p.setName("Peter");
+		/*p.setName("Peter");*/
 
 		// the new objet is transient
-		//Player p2 = new Player();
-		//p2.setId(4);
-		//p2.setName("James BOND");
-		//p2.setMail("jamesbond@test.fr");
-		//p2.setPseudo("jaja");
+		/*Player p2 = new Player();
+		p2.setId(4);
+		p2.setName("James BOND");
+		p2.setMail("jamesbond@test.fr");
+		p2.setPseudo("jaja");*/
 
 		// this object become a persistent object
 		//em.persist(p2);
@@ -67,7 +67,7 @@ public class Main {
 		 
 		 
 		 
-		 //p1.setName("John DOE2");
+		 /*p1.setName("John DOE2");*/
 		 
 		//create player2
 		 Player p2 = new Player();
@@ -78,11 +78,11 @@ public class Main {
 		 p2.setDateNaissance(LocalDate.now()); 
 		 
 		  
-		 //TypedQuery<Player> query = em.createQuery("SELECT p FROM Player p WHERE name = :name", Player.class);
-		 //query.setParameter("name", "John DOE2");
+		 /*TypedQuery<Player> query = em.createQuery("SELECT p FROM Player p WHERE name = :name", Player.class);
+		 query.setParameter("name", "John DOE2");
 		  
-		 //p1 = query.getSingleResult(); 
-		 //System.out.println(p1.toString());
+		 p1 = query.getSingleResult(); 
+		 System.out.println(p1.toString());*/
 		 
 		 //create personnage1
 		 Avatar perso1 = new Avatar();
